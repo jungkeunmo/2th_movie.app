@@ -1,38 +1,81 @@
-.App {
-  text-align: center;
-}
+@import "./reset.css";
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+.main {
+  width: 100%;
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.content {
+  width: 1350px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+
+  padding: 70px 20px;
+}
+/* PC : 600 mobile : 350 */
+
+.movieBox {
+  width: 580px;
+  height: 320px;
+
+  margin: 0px 30px 50px 30px;
+
+  background-color: rgb(220, 220, 220);
+  border-radius: 15px;
+  box-shadow: 4px 4px 2px rgb(210, 210, 210);
+
+  display: flex;
+  flex-direction: row;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.movieBox .movieBox__left {
+  width: 220px;
+  height: 100%;
+
+  position: relative;
+}
+
+.movieBox .movieBox__left img {
+  width: 200px;
+  height: 300px;
+
+  position: absolute;
+
+  left: -15px;
+  right: -15px;
+
+  border-radius: 15px;
+  box-shadow: 4px 4px 2px rgb(210, 210, 210);
+}
+
+.movieBox .movieBox__right {
+  width: 380px;
+  height: 100%;
+
+  padding: 10px;
+}
+
+.mr .mr__title {
+  font-size: 17px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.mr .mr__score {
+  font-size: 14px;
+  color: #999;
+  margin-bottom: 30px;
+}
+
+.mr .mr__summary {
+  font-size: 15px;
+  color: #333;
 }
