@@ -1,44 +1,64 @@
 import React from "react";
 import MovieBox from "./components/movieBox";
-
-// 가상 데이터
-const movies = [
-    {
-        title: "声の形",
-        score: 10,
-        poster: 
-        "https://i.pinimg.com/474x/de/66/2d/de662dcb9075264769eb3297c48c5a3c.jpg"
-    },
-    {
-        title: "帰滅の刃",
-        score: 10,
-        poster: 
-        "https://maxmovie.cdnsave.com/images/1620014022753AOJ0T.jpg"
-    },
-    {
-        title: "あなたの膵臓を食べたい",
-        score: 10,
-        poster: 
-        "https://ww.namu.la/s/3e4281f70e444746c42f9edced80316e1b1d8c1ef9612621d1130bc39fd0007603b4a25f8cebff563e43e4fff67d1df14e108d07f4a854a330ce2fd1c0ac94f770084b0c5e940ffe48d2d78ac72c8a3e32a33724868f725321740b5c78f5584b"
-    },
-    {
-        title: "ハウルの動く城",
-        score: 10,
-        poster: 
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5Y2_eAMZCAN45mhxVkYp6LZv7bvTkWeu1QA&usqp=CAU"
-    },
-];
+import axios from "axios";
 
 class App extends React.Component {
     //Virtual Movie Datums
 
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            movies: null,
+            currentType: 1,
+    
+        };
+    }
+
+    _getMovieData = async() => {
+
+
+        const result = await axios.get(
+            "https://api.themoviedb.org/3/movie/popular?api_key=6f468133ad08eef8c7a50210567d8a1b"
+        );
+
+        console.log(result.data.results);
+        this.setState((prevState) => {
+            return {
+                movies: result.data.results,
+            }
+        });
+    };
+
+    _typeBtnClickHandler = (value) => {
+        this.setState((prevState) => {
+            return { 
+                currentType: value,
+                
+            };
+        });
+
+        this._getMovieData();
+    }
+
+    componentDidMount(){
+        this._getMovieData();
+    };
+
     render() {
         return (
             <main className="main">
-                <section className="content">
-                    {movies.map((movie) => {
-                        return <MovieBox movie={movie} />
-                    })}
+                <div className="typeArea">
+                    <button className={this.currentType === 1 ? "active" : ""}
+                    onClick={() => this._typeBtnClickHandler(1)}
+                    > 인기영화 </button>
+                    <button className={this.currentType === 2 ? "active" : ""}
+                    onClick={() => this._typeBtnClickHandler(2)}> 현재 상영 영화 </button>
+                </div>
+                <section className="content">              
+                    {this.state.movies === null ? "LOADING" : this.state.movies.map(movie => {
+                        return <MovieBox key={movie.id} movie={movie} />
+                    })};
                 </section>
             </main>        
         );

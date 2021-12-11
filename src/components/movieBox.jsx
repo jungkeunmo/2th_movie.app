@@ -9,16 +9,12 @@ render() {
     return (
         <section className="movieBox">
             <section className="movieBox__left">
-                <img src={this.props.movie.poster} alt="poster" />
+                <img src={`https://image.tmdb.org/t/p/w500${this.props.movie.poster_path}`} alt="poster" />
             </section>
             <section className="movieBox__right mr">
                 <article className="mr__title">{this.props.movie.title}</article>
-                <article className="mr__score">🐰{this.props.movie.score}</article>
-                <article className="mr__summary">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
-                    Nostrum fugit autem fugiat quas sequi officia eligendi minima ipsa, amet ullam, quam nam?
-                    Labore adipisci aut quisquam incidunt reiciendis sunt autem. 
-                </article>
+                <article className="mr__score">🐰{this.props.movie.vote_average}</article>
+                <article className="mr__summary">{this.props.movie.overview}</article>
             </section>
         </section>               
         );
